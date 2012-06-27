@@ -11,12 +11,12 @@
   </parent>
 
   <groupId>org.juzu</groupId>
-  <artifactId>juzu-appzu-qrcode-parent</artifactId>
+  <artifactId>juzu-appzu-rss-parent</artifactId>
   <version>0.6.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>QRCode Application</name>
-  <description>QRCode app using Portlet filters</description>
+  <name>RSS Application</name>
+  <description>RSS app using Portlet filters</description>
 
   <properties>
     <maven.compiler.target>1.5</maven.compiler.target>
@@ -72,7 +72,7 @@
   </dependencies>
 
   <build>
-    <finalName>qrcode</finalName>
+    <finalName>rss</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -126,12 +126,12 @@
                   <artifactItems>
                     <artifactItem>
                       <groupId>org.juzu</groupId>
-                      <artifactId>juzu-appzu-qrcode-parent</artifactId>
+                      <artifactId>juzu-appzu-rss-parent</artifactId>
                       <version>1.0-SNAPSHOT</version>
                       <type>war</type>
                       <overWrite>false</overWrite>
                       <outputDirectory>${project.output.directory}</outputDirectory>
-                      <destFileName>qrcode.war</destFileName>
+                      <destFileName>rss.war</destFileName>
                     </artifactItem>
                   </artifactItems>
                 </configuration>

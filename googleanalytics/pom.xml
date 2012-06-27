@@ -117,7 +117,7 @@
                       <version>1.0-SNAPSHOT</version>
                       <type>war</type>
                       <overWrite>false</overWrite>
-                      <outputDirectory>/Users/benjamin/java/demos/eXo-Platform-tomcat-3.5.3-MOD/tomcat-bundle/webapps</outputDirectory>
+                      <outputDirectory>${project.output.directory}</outputDirectory>
                       <destFileName>googleanalytics.war</destFileName>
                     </artifactItem>
                   </artifactItems>

@@ -34,6 +34,8 @@
     <!-- Juzu Framework Version -->
     <org.juzu.parent.version>0.5.0</org.juzu.parent.version>
 
+    <project.output.directory>/Users/benjamin/java/demos/eXo-Platform-tomcat-3.5.3-MOD/tomcat-bundle/webapps</project.output.directory>
+
   </properties>
 
   <developers>
@@ -64,6 +66,7 @@
   <modules>
     <module>googleanalytics</module>
     <module>qrcode</module>
+    <module>rss</module>
   </modules>
 
 </project>
