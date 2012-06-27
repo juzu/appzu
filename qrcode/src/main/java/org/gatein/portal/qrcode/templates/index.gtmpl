@@ -1,0 +1,7 @@
+<div id="qrcode_div"></div>
+
+<script>
+    var url = document.URL;
+    $('#qrcode_div').qrcode({'width':${size}, 'height':${size}, text: "${url}"});
+    $('canvas').css({'margin-left': 'auto', 'margin-right': 'auto', 'display': 'block', 'background-color': '#FFF', 'padding': '10px'});
+</script>
