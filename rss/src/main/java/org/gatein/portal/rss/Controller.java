@@ -47,11 +47,7 @@ public class Controller
   {
     String cache = portletPreferences.getValue("cache", "300");
     String url = portletPreferences.getValue("url", "");
-    Map<String, Object> parameters = new HashMap<String, Object>();
-    parameters.put("cache", cache);
-    parameters.put("id", url.hashCode());
-
-    indexTemplate.render(parameters);
+    indexTemplate.with().set("cache", cache).set("id", url.hashCode()).render();
   }
 
   @Resource
@@ -92,10 +88,7 @@ public class Controller
 
     }
 
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put("feed", feed_);
-
-    feedTemplate.render(params);
+    feedTemplate.with().set("feed", feed_).render();
 
   }
 
