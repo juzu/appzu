@@ -1,0 +1,16 @@
+  <div class="titleRss">${feed.title}</div>
+    <% feed.items.each { item -> %>
+
+     <div class="item">
+       <a class="link" href="${item.link}" target="_new">
+         <div class="title">${item.title}</div>
+         <div class="pubDate">${item.pubDate}</div>
+         <div class="description">${item.description}</div>
+       </a>
+     </div>
+
+    <% } %>
+
+
+  <div class="more" target="_new"><a href="${feed.more}">Show more...</a></div>
+</div>

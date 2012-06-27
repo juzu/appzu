@@ -1,0 +1,43 @@
+.simpleRssPortlet {
+  padding: 2px;
+}
+
+.simpleRssPortlet .more {
+  text-align: center;
+}
+
+.simpleRssPortlet .more a {
+  color: #226AB4;
+  text-decoration: none;
+}
+
+.simpleRssPortlet .titleRss {
+  line-height: 25px;
+  padding: 0 5px 0 8px;
+  background: #F8F8F8;
+  border: 1px solid #E1E1E1;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #2F3334;
+  font-size: 14px;
+}
+
+.simpleRssPortlet .item {
+  padding: 10px;
+}
+
+.simpleRssPortlet .item .title {
+  font-size: 100%;
+  color: #434343;
+}
+
+.simpleRssPortlet .item .pubDate {
+  font-size: 80%;
+  color: #999;
+}
+
+.simpleRssPortlet .item .description {
+  font-size: 80%;
+  color: #434343;
+}

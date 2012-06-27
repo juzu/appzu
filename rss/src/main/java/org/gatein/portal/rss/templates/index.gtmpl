@@ -1,0 +1,20 @@
+<div class="simpleRssPortlet" id="simpleRssPortlet${id}"></div>
+
+<script>
+  $(document).ready(function(){
+    if (!localStorage.simpleRssTS) localStorage.simpleRssTS=0;
+
+    var now = Math.round(+new Date()/1000);
+
+    if (!localStorage.simpleRssData || localStorage.simpleRssTS<now) {
+      console.log("get data feed");
+      $("#simpleRssPortlet${id}").load("@{getFeed()}", function(data) {
+        localStorage.simpleRssData = data;
+        localStorage.simpleRssTS = Math.round(+new Date()/1000) + ${cache};
+      });
+    } else {
+      $("#simpleRssPortlet${id}").html(localStorage.simpleRssData);
+    }
+
+  });
+</script>
