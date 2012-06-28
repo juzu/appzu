@@ -1,4 +1,5 @@
 .DS_Store
 *.iml
 target/
+generated/
 qrcode/juzu-appzu-qrcode-parent.iml
