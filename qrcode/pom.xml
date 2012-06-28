@@ -56,19 +56,6 @@
       <version>2.5</version>
     </dependency>
 
-    <dependency>
-        <groupId>org.exoplatform.portal</groupId>
-        <artifactId>exo.portal.component.portal</artifactId>
-        <version>3.2.3-PLF</version>
-        <scope>provided</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.exoplatform.portal</groupId>
-        <artifactId>exo.portal.webui.portal</artifactId>
-        <version>3.2.3-PLF</version>
-        <scope>provided</scope>
-    </dependency>
-
   </dependencies>
 
   <build>
