@@ -1,6 +1,7 @@
 @Assets(
         scripts = {
-                @Script(src = "js/jquery-1.7.1.min.js")
+                @Script(id = "jquery", src = "js/jquery-1.7.1.min.js"),
+                @Script(id = "jquery-utils", src = "js/jquery-juzu-utils-0.1.0.js", depends = "jquery")
         },
         stylesheets = {
                 @Stylesheet(src = "css/simple-rss.css")
