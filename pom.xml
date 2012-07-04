@@ -55,6 +55,14 @@
         <role>Developer</role>
       </roles>
     </developer>
+    <developer>
+      <id>mto</id>
+      <name>Minh Hoang TO</name>
+      <email>hoang281283@gmail.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <scm>
@@ -67,6 +75,7 @@
     <module>googleanalytics</module>
     <module>qrcode</module>
     <module>rss</module>
+    <module>github</module>
   </modules>
 
 </project>

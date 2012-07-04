@@ -1,0 +1,10 @@
+#{param name=callbackURI/}
+
+	To access protected resource on GitHub, users are invited to click <a href="@{GithubApplication.gotoGithubOAuth(redirectURI = callbackURI)}"><b>here</b></a> to authenticate themselves via GitHub OAuth Provider.
+
+
+
+
+
+
+

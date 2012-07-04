@@ -1,0 +1,12 @@
+#{param name=repositories/}
+
+	<% for (def repository : repositories) { %>
+
+	<p>
+	  ${repository.name}<br/>
+	  Created date: ${repository.created_at}<br/>
+	  Description:<br/>
+	  ${repository.description}
+	</p>
+
+	<% } %>
