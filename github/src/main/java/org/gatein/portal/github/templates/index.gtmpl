@@ -1,8 +1,28 @@
 #{param name=callbackURI/}
 
-	To access protected resource on GitHub, users are invited to click <a href="@{GithubApplication.gotoGithubOAuth(redirectURI = callbackURI)}"><b>here</b></a> to authenticate themselves via GitHub OAuth Provider.
+   <p>
+      You are invited to authorize portal access to GitHub. The scope let you specify exactly what type of access you need.
+   </p>
 
+   <ul>
+      <li>(no scope) - public read-only access (includes user profile info, public repo info, and gists).</li>
+      <li><code>user</code> - DB read/write access to profile info only.</li>
+      <li><code>public_repo</code> - DB read/write access, and Git read access to public repos.</li>
+      <li><code>repo</code> - DB read/write access, and Git read access to public and private repos.</li>
+      <li><code>gist</code> - write access to gists.</li>
+   </ul>
 
+   <p>
+      Please select scope(s), then click on the 'Go' button to navigate yourself to GitHub login page.
+   </p>
+
+   <form action="@{GithubApplication.gotoGithubOAuth(redirectURI = callbackURI)}" method="post">
+      <input type="checkbox" name="scope" value="user"/>user<br/>
+      <input type="checkbox" name="scope" value="public_repo"/>public_repo<br/>
+      <input type="checkbox" name="scope" value="repo"/>repo<br/>
+      <input type="checkbox" name="scope" value="gist"/>gist<br/>
+      <input type="submit" value="Go"/>
+   </form>
 
 
 

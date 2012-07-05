@@ -83,8 +83,13 @@ public class GithubApplication extends Controller
       b.append(httpContext.getServerName()).append(":").append(httpContext.getServerPort());
       b.append(redirectURI);
 
+      String[] scopeParam = actionContext.getParameters().get("scope");
       String ghURL = "https://github.com/login/oauth/authorize";
       ghURL += "?client_id=" + portletPreferences.getValue("clientID", "55e31ea2fc7cdea37c00");
+      if(scopeParam != null)
+      {
+         ghURL +="&scope=" + scopeParam[0];
+      }
       ghURL += "&redirect_uri=" + URLEncoder.encode(b.toString(), "UTF-8");
 
       return new Response.Redirect(ghURL);
