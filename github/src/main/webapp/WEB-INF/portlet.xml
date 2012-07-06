@@ -8,10 +8,16 @@
      <portlet-name>GithubApplication</portlet-name>
      <display-name xml:lang="EN">Github Application</display-name>
      <portlet-class>org.gatein.portal.github.GithubPortlet</portlet-class>
+     <!--
      <init-param>
        <name>juzu.run_mode</name>
        <value>dev</value>
      </init-param>
+     <init-param>
+       <name>juzu.src_path</name>
+       <value>/home/hoang_to/java/juzu/appzu/github/src/main/java</value>
+     </init-param>
+     -->
      <supports>
        <mime-type>text/html</mime-type>
      </supports>

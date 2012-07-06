@@ -90,6 +90,16 @@ public class GithubAccess implements Serializable
       return githubMyself;
    }
 
+   public String getGithubLogin()
+   {
+      return getGithubMyself().getLogin();
+   }
+
+   public String getAvatarURL()
+   {
+      return getGithubMyself().getAvatarUrl();
+   }
+
    public Collection<GHRepository> getMyselfRepositories()
    {
       try

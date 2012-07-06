@@ -18,8 +18,16 @@
  */
 package org.gatein.portal.github.controllers;
 
+import juzu.Action;
 import juzu.Path;
+import juzu.Response;
 import juzu.View;
+import org.kohsuke.github.GHCommit;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.PagedIterable;
+import org.kohsuke.github.PagedIterator;
+import java.util.LinkedList;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -30,15 +38,57 @@ public class GithubResource
 {
 
    @Inject
-   @Path("github/index.gtmpl")
-   org.gatein.portal.github.templates.github.index index;
+   @Path("github/repositories.gtmpl")
+   org.gatein.portal.github.templates.github.repositories repositories;
+
+   @Inject
+   @Path("github/commits.gtmpl")
+   org.gatein.portal.github.templates.github.commits commits;
+
+   @Inject
+   @Path("github/network.gtmpl")
+   org.gatein.portal.github.templates.github.network network;
 
    @Inject
    GithubAccess githubAccess;
 
-   @View
-   public void showResources()
+   @Action
+   public Response leave()
    {
-      index.with().repositories(githubAccess.getMyselfRepositories()).render();
+      githubAccess.setAccessToken(null);
+      return GithubApplication_.index();
+   }
+
+   @View
+   public void showCommits(String repository) throws Exception
+   {
+      GHRepository ghRepo = githubAccess.getGithubMyself().getRepositories().get(repository);
+      PagedIterator<GHCommit> iterator = ghRepo.listCommits().iterator();
+
+      int n = 0;
+      List<GHCommit> latestCommits = new LinkedList<GHCommit>();
+      while(iterator.hasNext() && n < 10)
+      {
+         latestCommits.add(iterator.next());
+         n++;
+      }
+      commits.with().repository(repository).latestCommits(latestCommits).render();
+   }
+
+   @View
+   public void latestActivities()
+   {
+   }
+
+   @View
+   public void showRepositories()
+   {
+      repositories.with().repositories(githubAccess.getMyselfRepositories()).render();
+   }
+
+   @View
+   public void forkNetwork(String repository)
+   {
+
    }
 }

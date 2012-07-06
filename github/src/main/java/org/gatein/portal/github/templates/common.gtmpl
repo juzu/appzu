@@ -1,0 +1,23 @@
+<div class="github">
+   <div class="header">
+      <% if(githubAccess.hasAccessToken()) { %>
+      <div class="options">
+         Connected as <%= githubAccess.getGithubLogin(); %>
+         |
+         <a href="@{GithubResource.showRepositories()}">Repositories</a>
+         |
+         <a href="@{GithubResource.latestActivities()}">Activities</a>
+         |
+         <a href="@{GithubResource.leave()}">Logout</a>
+      </div>
+      <% } %>
+   </div>
+
+   <div class="content">
+      #{insert/}
+   </div>
+
+   <div class="footer">
+      2012 GitHub Inc. All rights reserved.
+   </div>
+</div>

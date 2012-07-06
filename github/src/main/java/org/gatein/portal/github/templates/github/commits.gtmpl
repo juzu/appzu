@@ -1,0 +1,22 @@
+#{decorate path=common.gtmpl/}
+
+#{param name=repository/}
+#{param name=latestCommits/}
+
+   <h2>${repository}/ Commit History</h2>
+
+   <ul>
+      <% for(def commit : latestCommits) { %>
+      <li>
+         <ul>
+            <li>
+               <img height="36" width="36" src="${commit.author.avatar_url}"/>
+               <a href="${commit.url}">${commit.sha}</a>
+            </li>
+            <li>Total: <%= commit.getLinesChanged(); %></li>
+            <li>Additions: <%= commit.getLinesAdded(); %></li>
+            <li>Deletions: <%= commit.getLinesDeleted(); %></li>
+         </ul>
+      </li>
+      <% } %>
+   </ul>

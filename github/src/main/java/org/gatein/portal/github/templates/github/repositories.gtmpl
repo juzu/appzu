@@ -1,0 +1,16 @@
+#{decorate path=common.gtmpl/}
+
+#{param name=repositories/}
+
+   <ul>
+      <% for(def repository : repositories) { %>
+      <li>
+          ${repository.name} - ${repository.created_at}<br/>
+         <p>
+            ${repository.description}
+         </p>
+         <br/>
+         <a href="@{GithubResource.showCommits(repository = repository.name)}">Commits</a>
+      </li>
+      <% } %>
+   </ul>

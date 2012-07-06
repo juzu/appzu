@@ -23,7 +23,6 @@ import juzu.Controller;
 import juzu.Path;
 import juzu.Response;
 import juzu.View;
-import juzu.template.Template;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,10 +34,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.gatein.portal.github.templates.index;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,16 +82,25 @@ public class GithubApplication extends Controller
       b.append(httpContext.getServerName()).append(":").append(httpContext.getServerPort());
       b.append(redirectURI);
 
-      String[] scopeParam = actionContext.getParameters().get("scope");
-      String ghURL = "https://github.com/login/oauth/authorize";
-      ghURL += "?client_id=" + portletPreferences.getValue("clientID", "55e31ea2fc7cdea37c00");
-      if(scopeParam != null)
-      {
-         ghURL +="&scope=" + scopeParam[0];
-      }
-      ghURL += "&redirect_uri=" + URLEncoder.encode(b.toString(), "UTF-8");
+      StringBuilder ghURL = new StringBuilder("https://github.com/login/oauth/authorize");
+      ghURL.append("?client_id=" + portletPreferences.getValue("clientID", "55e31ea2fc7cdea37c00"));
 
-      return new Response.Redirect(ghURL);
+      /*
+      String[] scopes = actionContext.getParameters().get("scope");
+      if(scopes != null && scopes.length > 0)
+      {
+         ghURL.append("&scope=" + scopes[0]);
+         for(int i = 1; i< scopes.length; i++)
+         {
+            ghURL.append("," + scopes[i]);
+         }
+
+      }
+      */
+      ghURL.append("&scope=user,public_repo,repo,gist");
+      ghURL.append("&redirect_uri=" + URLEncoder.encode(b.toString(), "UTF-8"));
+
+      return new Response.Redirect(ghURL.toString());
    }
 
    @View
@@ -125,7 +133,7 @@ public class GithubApplication extends Controller
       });
 
       githubAccess.setAccessToken(accessToken);
-      githubResource.showResources();
+      githubResource.showRepositories();
    }
 
    @View
@@ -133,7 +141,7 @@ public class GithubApplication extends Controller
    {
       if(githubAccess.hasAccessToken())
       {
-         githubResource.showResources();
+         githubResource.showRepositories();
       }
       else
       {
