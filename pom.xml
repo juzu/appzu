@@ -76,6 +76,7 @@
     <module>qrcode</module>
     <module>rss</module>
     <module>github</module>
+    <module>livescore</module>
   </modules>
 
 </project>

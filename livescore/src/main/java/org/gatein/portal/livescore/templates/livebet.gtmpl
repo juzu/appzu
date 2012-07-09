@@ -1,0 +1,7 @@
+#{param name=match/}
+
+   <h2>${match.home.name} vs ${match.away.name}</h2>
+
+   <form action="" method="post">
+
+   </form>

@@ -1,0 +1,44 @@
+#{param name=matches/}
+#{param name=livescoreURL/}
+
+   <table id="livematches">
+      <% for(def match : matches) { %>
+      <tr id="${match.id}" class="match">
+         <td>${match.home.name}</td>
+         <td><span class="livescore">${match.score}</span></td>
+         <td>${match.away.name}</td>
+         <td><a href="@{showLiveBet(matchID = match.id)}">Live bet</a></td>
+      </tr>
+      <% } %>
+   </table>
+
+   <script type="text/javascript">
+      var url = "<%= livescoreURL; %>";
+      $(function()
+      {
+         var updateScore = function()
+         {
+            $.getJSON(url, function(data)
+            {
+               try
+               {
+                  $("table#livematches").find("tr").each(function()
+                  {
+                     var tr = $(this);
+                     var newScore = data[tr.attr("id")];
+                     if(newScore)
+                     {
+                        tr.find("span.livescore").text(newScore);
+                     }
+                  });
+               }
+               catch(err)
+               {
+               }
+               setTimeout(updateScore, 1000);
+            });
+         };
+
+         updateScore();
+      });
+   </script>
