@@ -16,8 +16,8 @@
   <version>0.6.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>GitHub Application</name>
-  <description>GitHub Application</description>
+  <name>Live Score Application</name>
+  <description>Live Score Application</description>
 
   <properties>
     <maven.compiler.target>1.6</maven.compiler.target>
@@ -45,8 +45,8 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>3.0</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
