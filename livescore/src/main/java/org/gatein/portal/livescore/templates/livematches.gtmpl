@@ -1,3 +1,5 @@
+#{decorate path=common.gtmpl/}
+
 #{param name=matches/}
 #{param name=livescoreURL/}
 
@@ -13,9 +15,9 @@
    </table>
 
    <script type="text/javascript">
-      var url = "<%= livescoreURL; %>";
-      $(function()
+      require(["SHARED/jquery"],function($)
       {
+         var url = "<%= livescoreURL; %>";
          var updateScore = function()
          {
             $.getJSON(url, function(data)

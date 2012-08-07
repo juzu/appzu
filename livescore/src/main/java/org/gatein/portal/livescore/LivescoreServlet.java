@@ -18,6 +18,7 @@
  */
 package org.gatein.portal.livescore;
 
+import org.gatein.portal.livescore.models.PremierLeague;
 import org.gatein.portal.livescore.service.DataListener;
 import org.gatein.portal.livescore.service.LiveData;
 import org.gatein.portal.livescore.service.LiveDataProvider;
@@ -31,8 +32,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import javax.servlet.AsyncContext;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
@@ -155,7 +154,11 @@ public class LivescoreServlet extends HttpServlet implements DataListener
       finally
       {
          liveScore = null;
-      }
 
+         for(Map.Entry<String, String> matchScore : score.getMatchScores().entrySet())
+         {
+            PremierLeague.PREMIER_LEAGUE_MATCHES.get(matchScore.getKey()).setScore(matchScore.getValue());
+         }
+      }
    }
 }

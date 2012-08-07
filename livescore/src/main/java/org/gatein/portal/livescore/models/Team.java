@@ -18,9 +18,6 @@
  */
 package org.gatein.portal.livescore.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author <a href="hoang281283@gmail.com">Minh Hoang TO</a>
  * @date 7/6/12
@@ -36,29 +33,8 @@ public class Team
       this.logo = "";
    }
 
-   public final static List<Team> PREMIER_LEAGUE = new ArrayList<Team>(20);
-
-   static
+   public String getName()
    {
-      PREMIER_LEAGUE.add(new Team("FC Arsenal"));
-      PREMIER_LEAGUE.add(new Team("Aston Villa"));
-      PREMIER_LEAGUE.add(new Team("FC Chelsea"));
-      PREMIER_LEAGUE.add(new Team("Everton"));
-      PREMIER_LEAGUE.add(new Team("FC Fulham"));
-      PREMIER_LEAGUE.add(new Team("FC Liverpool"));
-      PREMIER_LEAGUE.add(new Team("Manchester City"));
-      PREMIER_LEAGUE.add(new Team("Manchester United"));
-      PREMIER_LEAGUE.add(new Team("Newcastle United"));
-      PREMIER_LEAGUE.add(new Team("Norwich City"));
-      PREMIER_LEAGUE.add(new Team("Queens Park Rangers"));
-      PREMIER_LEAGUE.add(new Team("Reading"));
-      PREMIER_LEAGUE.add(new Team("Southampton"));
-      PREMIER_LEAGUE.add(new Team("Stoke City"));
-      PREMIER_LEAGUE.add(new Team("Sunderland"));
-      PREMIER_LEAGUE.add(new Team("Swansea City"));
-      PREMIER_LEAGUE.add(new Team("Tottenham Hotspur"));
-      PREMIER_LEAGUE.add(new Team("West Bromwich Albion"));
-      PREMIER_LEAGUE.add(new Team("West Ham United"));
-      PREMIER_LEAGUE.add(new Team("Wigan Athletic"));
+      return name;
    }
 }

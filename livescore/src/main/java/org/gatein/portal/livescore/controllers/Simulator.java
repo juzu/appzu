@@ -19,59 +19,52 @@
 package org.gatein.portal.livescore.controllers;
 
 import juzu.Action;
-import juzu.Controller;
 import juzu.Path;
 import juzu.Response;
 import juzu.View;
 import org.gatein.portal.livescore.models.PremierLeague;
+import org.gatein.portal.livescore.service.LiveDataProvider;
+import org.gatein.portal.livescore.service.LivescoreData;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 
 /**
  * @author <a href="hoang281283@gmail.com">Minh Hoang TO</a>
- * @date 7/6/12
+ * @date 7/10/12
  */
-public class LiveMatches extends Controller
+public class Simulator
 {
    @Inject
-   @Path("livematches.gtmpl")
-   org.gatein.portal.livescore.templates.livematches livematches;
+   @Path("simulator.gtmpl")
+   org.gatein.portal.livescore.templates.simulator simulator;
 
    @Inject
-   @Path("livebet.gtmpl")
-   org.gatein.portal.livescore.templates.livebet livebet;
-
-   @Inject
-   public LiveMatches()
+   public Simulator()
    {
    }
 
    @Action
-   public Response sendBetOrder()
+   public Response updateLivescores(String livescores)
    {
-      return LiveMatches_.showLiveMatches();
-   }
+      String[] scores = livescores.split(";");
+      Map<String, String> data = new HashMap<String, String>();
+      for(String score : scores)
+      {
+         int i = score.indexOf(":");
+         if(i >= 0)
+         {
+            data.put(score.substring(0, i), score.substring(i + 1));
+         }
+      }
+      LiveDataProvider.getInstance().receiveData(new LivescoreData(data));
 
-   @View
-   public void showLiveMatches()
-   {
-      StringBuilder b = new StringBuilder();
-      b.append(httpContext.getScheme()).append("://");
-      b.append(httpContext.getServerName()).append(":");
-      b.append(httpContext.getServerPort());
-      b.append("/livescore/livescore");
-
-      livematches.with().matches(PremierLeague.PREMIER_LEAGUE_MATCHES.values()).livescoreURL(b.toString()).render();
+      return simulator.render();
    }
 
    @View
    public void index()
    {
-      showLiveMatches();
-   }
-
-   @View
-   public void showLiveBet(String matchID)
-   {
-      livebet.with().match(PremierLeague.PREMIER_LEAGUE_MATCHES.get(matchID)).render();
+      simulator.with().matches(PremierLeague.PREMIER_LEAGUE_MATCHES.values()).render();
    }
 }

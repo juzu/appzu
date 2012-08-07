@@ -18,9 +18,6 @@
  */
 package org.gatein.portal.livescore.models;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @author <a href="hoang281283@gmail.com">Minh Hoang TO</a>
  * @date 7/6/12
@@ -29,7 +26,9 @@ public class Match
 {
    String id;
 
-   String score, startDate, endDate;
+   volatile String score;
+
+   String startDate, endDate;
 
    Team home, away;
 
@@ -38,18 +37,27 @@ public class Match
       this.id = id;
       this.home = home;
       this.away = away;
-      this.score = "0 - 0";
+      this.score = "0-0";
    }
 
-   public final static List<Match> PREMIER_LEAGUE_MATCHES = new LinkedList<Match>();
-
-   static
+   public void setScore(String score)
    {
-      int n = Team.PREMIER_LEAGUE.size();
-      for(int i = 0; i< n/2; i++)
-      {
-         PREMIER_LEAGUE_MATCHES.add(new Match("match-" + i, Team.PREMIER_LEAGUE.get(i), Team.PREMIER_LEAGUE.get(n -1 -i)));
-      }
-
+      this.score = score;
    }
+
+   public String getScore()
+   {
+      return score;
+   }
+
+   public Team getHome()
+   {
+      return home;
+   }
+
+   public Team getAway()
+   {
+      return away;
+   }
+
 }

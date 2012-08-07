@@ -8,6 +8,8 @@
      <portlet-name>LivescoreApplication</portlet-name>
      <display-name xml:lang="EN">Livescore Application</display-name>
      <portlet-class>org.gatein.portal.livescore.LivescorePortlet</portlet-class>
+     <!-- Portlet does not work properly in dev mode due to class loader story -->
+     <!--
      <init-param>
        <name>juzu.run_mode</name>
        <value>dev</value>
@@ -16,6 +18,7 @@
        <name>juzu.src_path</name>
        <value>/home/hoang_to/java/juzu/appzu/livescore/src/main/java</value>
      </init-param>
+     -->
      <supports>
        <mime-type>text/html</mime-type>
      </supports>

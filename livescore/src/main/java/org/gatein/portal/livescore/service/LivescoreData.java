@@ -58,4 +58,9 @@ public class LivescoreData implements LiveData
 
       return b.toString();
    }
+
+   public Map<String, String> getMatchScores()
+   {
+      return matchScores;
+   }
 }
