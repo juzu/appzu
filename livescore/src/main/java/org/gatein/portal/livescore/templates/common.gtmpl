@@ -1,7 +1,10 @@
-<div>
+<div class="livescoreapp">
    <div class="header">
-      <div><a href="@{LiveMatches.index()}">LiveMatches</a></div>
-      <div><a href="@{Simulator.index()}">Simulator</a></div>
+      <div class="tabs">
+         <a class="tab" href="@{LiveMatches.index()}">LiveMatches</a>
+         <div class="separator"><span>|</span></div>
+         <a class="tab" href="@{Simulator.index()}">Simulator</a>
+      </div>
    </div>
 
    <div class="content">

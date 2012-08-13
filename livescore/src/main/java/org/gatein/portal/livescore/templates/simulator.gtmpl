@@ -5,12 +5,15 @@
       <% for(def match : matches){ %>
       <tr>
          <td>${match.home.name} vs ${match.away.name}</td>
-         <td><input class="InputScore" type="text" name="${match.id}" value="${match.score}"/></td>
+         <td>
+            <input class="InputScore" type="text" name="${match.id}" value="${match.score}"/>
+            <input type="hidden" name="actualScore" value="${match.score}"/>
+         </td>
       </tr>
       <% } %>
    </table>
 
-   <form action="@{Simulator.updateLivescores()}" method="post">
+   <form id="simulatorForm"action="@{Simulator.updateLivescores()}" method="post">
       <input type="hidden" name="livescores" value=""/>
       <input type="submit" id="submitLivescores" value="OK"/>
    </form>
@@ -18,18 +21,20 @@
    <script type="text/javascript">
       require(["SHARED/jquery"],function($)
       {
-        $("input#submitLivescores").on("click", function()
+        $("form#simulatorForm").on("submit", function()
         {
            var liveScores = "";
            $("table#simulatorData").find("input.InputScore").each(function()
            {
               var input = $(this);
-              if(input.val() && input.val().trim().length > 0)
+              var actualScore = input.next("input");
+
+              if(input.val() && input.val().trim().length > 0 && input.val() != actualScore.val())
               {
                  liveScores += input.attr("name") + ":" + input.attr("value") + ";";
               }
            });
-           $("input#submitLivescores").val(liveScores);
+           $("input[name='livescores']").val(liveScores);
         });
       });
    </script>

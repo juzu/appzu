@@ -68,44 +68,11 @@ public class LivescoreServlet extends HttpServlet implements DataListener
    @Override
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
    {
-      //To simulate server side event easily, with a simple get request
-      // http://loalhost:8080/livescore/livescore?upScore=true&match-0='1-1'...&match-1='3-2'...
-      String upScore = req.getParameter("upScore");
-      if(upScore != null)
+      String tmp = liveScore;
+      if (tmp == null)
       {
-         Map<String, String> scores = new HashMap<String, String>();
-         Enumeration<String> params = req.getParameterNames();
-         while(params.hasMoreElements())
-         {
-            String param = params.nextElement();
-            if(param.startsWith("match-"))
-            {
-               String score = req.getParameter(param);
-               if(score.startsWith("'") && score.endsWith("'"))
-               {
-                  score = score.substring(1, score.length() - 1);
-               }
-               scores.put(param, score);
-            }
-         }
-
-         LiveDataProvider.getInstance().receiveData(new LivescoreData(scores));
-      }
-      else
-      {
-         String tmp = liveScore;
-         if (tmp == null)
-         {
-            AsyncContext ctx = req.startAsync(req, resp);
-            contexts.add(ctx);
-         }
-         /*
-         else
-         {
-            resp.setContentType("text/json");
-            resp.getWriter().append(tmp);
-         }
-         */
+         AsyncContext ctx = req.startAsync(req, resp);
+         contexts.add(ctx);
       }
    }
 

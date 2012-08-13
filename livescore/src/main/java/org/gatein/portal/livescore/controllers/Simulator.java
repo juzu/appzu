@@ -59,7 +59,7 @@ public class Simulator
       }
       LiveDataProvider.getInstance().receiveData(new LivescoreData(data));
 
-      return simulator.render();
+      return Simulator_.index();
    }
 
    @View

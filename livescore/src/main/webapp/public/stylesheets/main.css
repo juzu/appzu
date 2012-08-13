@@ -1,0 +1,9 @@
+.livescoreapp .header .tabs {
+    height: 24px;
+}
+
+.livescoreapp .header .tabs .tab,.separator {
+    float: left;
+    text-align: center;
+    width: auto;
+}
