@@ -1,0 +1,27 @@
+		<ul>
+		<%
+			component.initParams?.each({ valueParam ->
+				if(valueParam.value instanceof org.exoplatform.container.xml.ValueParam) {
+					out.println("<li>" + valueParam.key + " : " + valueParam.value + "</li>")	
+				} else if(valueParam.value instanceof org.exoplatform.container.xml.ValuesParam) {
+					out.println("<li>" + valueParam.key + " : ")
+					out.println("<ul>")
+					valueParam.value.values.each({ value ->
+						out.println("<li>" + value + "</li>")	
+					})
+					out.println("</ul>")
+					out.println("</li>")
+				} else if(valueParam.value instanceof org.exoplatform.container.xml.PropertiesParam) {
+					out.println("<li>" + valueParam.key + " : ")
+					out.println("<ul>")
+					valueParam.value.propertyIterator.each({ property ->
+						out.println("<li>" + property.name + " : " + property.value + "</li>")	
+					})
+					out.println("</ul>")
+					out.println("</li>")
+				} else if(valueParam.value instanceof org.exoplatform.container.xml.ObjectParameter) {
+					out.println("<li>" + valueParam.key + " : " + valueParam.value + "</li>")
+				}
+			})
+		%>
+		</ul>

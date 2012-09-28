@@ -1,0 +1,45 @@
+
+		<table id="components-table" class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Key</th>
+					<th>Implementation</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for (def component : components) { %>
+					<tr>
+						<td>${component.key}</td>
+						<td>${component.type}</td>
+						<td>
+							<a href="#" onclick="showComponent('${component.key}');">View</a>
+						</td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<div class="components-actions">
+			<a href="@{exportAll()}" class="btn">Export All</a>
+		</div>
+
+<script>
+$(document).ready(function() {
+    $.fn.dataTableExt.oStdClasses.sPaging += " pagination ";
+    $.fn.dataTableExt.oStdClasses.sPageButtonActive += " active ";
+    $('#components-table').dataTable( {
+		"bAutoWidth": false,
+		"bSortClasses": false,
+		"bStateSave": true,
+		"sPaginationType": "full_numbers",
+		"aoColumnDefs": [ 
+		  { "bSortable": false, "aTargets": [ 2 ] }
+		],
+		"aoColumns": [ 
+		  { "sClass": "column-key" },
+		  { "sClass": "column-implementation" },
+		  { "sClass": "column-action", "sWidth": "40px" }
+		]
+    } );
+} );
+</script>

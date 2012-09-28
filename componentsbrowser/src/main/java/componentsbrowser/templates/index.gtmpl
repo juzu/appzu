@@ -1,0 +1,10 @@
+<div class="components-main">
+	<div id="slider">
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+	$('#slider').jzLoad("Controller.list()",{});
+});
+</script>

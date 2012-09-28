@@ -1,0 +1,95 @@
+
+		<ul class="breadcrumb">
+		  <li>
+			<a href="#" onclick="javascript:backHome()">Home</a> <span class="divider">/</span>
+		  </li>
+		  <li>
+			<a href="#">${component.key}</a>
+		  </li>
+		</ul>
+		
+		<table class="table table-striped">
+			<tr>
+				<td class="componenttable-key">Key</td>
+				<td>${component.key}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Type</td>
+				<td>${component.type ?: ''}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">JMX Name</td>
+				<td>${component.jmxName ?: ''}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Description</td>
+				<td>${component.description ?: ''}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Plugins</td>
+				<td>${component.plugins ?: ''}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Component Plugins</td>
+				<td>
+				<%
+					component.componentPlugins.each({ componentPlugin ->
+						if(componentPlugin == component.componentPlugins.first()) {
+							out.println("<ul>");
+						}
+						out.println("<li>Name : " + componentPlugin.name + "</li>")
+						out.println("<li>Type : " + componentPlugin.type + "</li>")
+						out.println("<li>SetMethod : " + componentPlugin.setMethod + "</li>")
+						out.println("<li>Description : " + componentPlugin.description + "</li>")
+						out.println("<li>InitParams : " + componentPlugin.initParams + "</li>")
+						out.println("<li>Priority : " + componentPlugin.priority + "</li>")
+						if(componentPlugin == component.componentPlugins.last()) {
+							out.println("</ul>")
+						}
+					})
+				%>
+				</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Listeners</td>
+				<td>${component.listeners ?: ''}</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Init Params</td>
+				<td>
+				<%
+					component.initParams?.each({ valueParam ->
+						if(valueParam.value instanceof org.exoplatform.container.xml.ValueParam) {
+							out.println("<li>" + valueParam.key + " : " + valueParam.value + "</li>")	
+						} else if(valueParam.value instanceof org.exoplatform.container.xml.ValuesParam) {
+							out.println("<li>" + valueParam.key + " : ")
+							out.println("<ul>")
+							valueParam.value.values.each({ value ->
+								out.println("<li>" + value + "</li>")	
+							})
+							out.println("</ul>")
+							out.println("</li>")
+						} else if(valueParam.value instanceof org.exoplatform.container.xml.PropertiesParam) {
+							out.println("<li>" + valueParam.key + " : ")
+							out.println("<ul>")
+							valueParam.value.propertyIterator.each({ property ->
+								out.println("<li>" + property.name + " : " + property.value + "</li>")	
+							})
+							out.println("</ul>")
+							out.println("</li>")
+						} else if(valueParam.value instanceof org.exoplatform.container.xml.ObjectParameter) {
+							out.println("<li>" + valueParam.key + " : " + valueParam.value + "</li>")
+						}
+					})
+				%>
+				</td>
+			</tr>
+			<tr>
+				<td class="componenttable-key">Configuration file</td>
+				<td>${component.documentURL}</td>
+			</tr>
+		</table>
+		
+		<div style="width:100%;text-align:center;">
+			<div class="btn"><a href="@{export(key = component.key)}">Export</a></div>
+		</div>
