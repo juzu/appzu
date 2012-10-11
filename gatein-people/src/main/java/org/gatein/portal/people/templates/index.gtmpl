@@ -1,0 +1,49 @@
+<div id="people">
+
+<div id="modal-container">
+</div>
+
+<div id="foo">
+
+<div class="span4">
+  <div>
+    <form id="users-search" class="form-search">
+      <legend>Users</legend>
+      <fieldset>
+        <div class="control-group">
+          <div class="controls">
+            <input name="userName" class="input-medium span3 search-query" type="text" placeholder="Search"/>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="scrollbox">
+    <ul id="users" class="unstyled">
+    </ul>
+  </div>
+</div>
+<div class="span4">
+  <div>
+    <form id="groups-search" class="form-search">
+      <legend>Memberships</legend>
+      <fieldset>
+        <div class="control-group">
+          <div class="controls">
+            <input name="groupName" class="input-medium span3 search-query" type="text" placeholder="Search"/>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="scrollbox">
+    <ul id="groups" class="unstyled">
+    </ul>
+  </div>
+</div>
+
+<div style="clear:both"></div>
+
+</div>
+
+</div>

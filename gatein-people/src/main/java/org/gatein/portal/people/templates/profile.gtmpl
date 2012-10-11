@@ -1,0 +1,66 @@
+#{param name=user/}
+#{param name=profile/}
+
+<div id="modal" class="modal hide">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>${user.fullName} Profile</h3>
+  </div>
+  <div class="modal-body">
+    <form id="profile-form" class="form-horizontal">
+      <fieldset>
+        <input type="hidden" name="userName" value="${user.userName}"/>
+        <div class="control-group">
+          <label class="control-label" for="userName">Username</label>
+          <div class="controls">
+            <input id="userName" class="disabled" type="text" disabled="" placeholder="${user.userName}"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="email">Email Address</label>
+          <div class="controls">
+            <input id="email" name="email" type="text" value="${user.email}"/>
+          </div>
+        </div>
+        <div class="control-group">
+        <%
+          def countries = ["","France","US","UK","Italy","Spain"];
+          def userCountry = profile["user.home-info.postal.country"];
+          if (!countries.contains(userCountry)) {
+            userCountry = "";
+          }
+        %>
+          <label class="control-label" for="country">Country</label>
+          <div class="controls">
+            <select id="country" name="country" class="medium">
+              <% countries.each { country -> %>
+              <option ${userCountry == country ? "selected":""}>${country}</option>
+              <% } %>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="job">Job Title</label>
+          <div class="controls">
+            <input id="job" name="job" type="text" value="${profile['user.jobtitle']?:''}"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="cell-phone">Cell Phone</label>
+          <div class="controls">
+            <input id="cell-phone" name="cell-phone" type="text" value="${profile['user.home-info.telecom.mobile.number']?:''}"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="work-phone">Work Phone</label>
+          <div class="controls">
+            <input id="work-phone" name="work-phone" type="text" value="${profile['user.business-info.telecom.mobile.number']?:''}"/>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary">Save</a>
+  </div>
+</div>

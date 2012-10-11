@@ -1,0 +1,8 @@
+#{param name=users/}
+<% users.each { user -> %>
+  <li id="${user.userName}" class="user">
+    <a class="editable" href="#"><i class="icon-search icon-user"></i></a>
+    <a class="checkable"href="#"><i class="icon-search icon-empty"></i><i class="icon-search icon-plane"></i><i class="icon-search icon-magnet"></i></a>
+    <div class="display-name">${user.firstName} ${user.lastName}</div>
+  </li>
+<% } %>
