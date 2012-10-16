@@ -11,7 +11,7 @@
      <init-param>
        <name>juzu.run_mode</name>
        <value>prod</value>
-     </init-param>
+	 </init-param>
      <init-param>
        <name>juzu.inject</name>
        <value>weld</value>

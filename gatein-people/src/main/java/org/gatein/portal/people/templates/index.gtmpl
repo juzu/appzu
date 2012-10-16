@@ -47,3 +47,7 @@
 </div>
 
 </div>
+
+<script class="gatein-people findUsers template" type="text/template">
+<h1>{{userName}} {{firstName}} {{lastName}}</h1>
+</script>

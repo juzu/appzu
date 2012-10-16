@@ -17,12 +17,19 @@
  */
 package org.gatein.portal.people.test;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.component.test.KernelBootstrap;
+import org.exoplatform.container.RootContainer;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.gatein.pc.embed.EmbedServlet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -32,7 +39,9 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.json.JSONObject;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -134,13 +143,39 @@ public class GateInPeopleTestCase
   @ArquillianResource
   URL deploymentURL;
 
-  @Test
-  @RunAsClient
-  public void test() throws Exception
+	@Test
+	@RunAsClient
+	public void testFindUser() throws Exception
 	{
-    URL url = deploymentURL.toURI().resolve("embed/PeopleApplication").toURL();
+		//
+		URL url = deploymentURL.toURI().resolve("embed/PeopleApplication").toURL();
+		driver.get(url.toString());
+		URL findUserURL =
+		   new URL(url.toString() + "?juzu.op=Controller.findUsers&javax.portlet.id=0&javax.portlet.phase=resource");
+		HttpURLConnection conn = (HttpURLConnection)findUserURL.openConnection();
+		conn.connect();
+		Assert.assertEquals("application/json;charset=UTF-8", conn.getContentType());
+		Assert.assertEquals(200, conn.getResponseCode());
+		
+		//
+		BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buff = new byte[256];
+		for (int l = bis.read(buff); l != -1; l = bis.read(buff))
+		{
+			baos.write(buff, 0, l);
+		}
+		String response = new String(baos.toByteArray(), "UTF-8");
 
-    //
-    driver.get(url.toString());
+		//
+		JSONObject json = new JSONObject(response);
+		OrganizationService orgService = (OrganizationService)RootContainer.getInstance().getComponentInstanceOfType(OrganizationService.class);
+		ListAccess<User> listAccess = orgService.getUserHandler().findAllUsers();
+		Assert.assertEquals(10, listAccess.getSize());
+		User[] users = listAccess.load(0, 10);
+		for(int i = 0; i < 10; i++)
+		{
+			Assert.assertNotNull(json.get(users[i].getUserName()));
+		}
 	}
 }

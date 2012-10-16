@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import juzu.Path;
 import juzu.Resource;
 import juzu.Route;
 import juzu.View;
+import juzu.impl.common.Builder;
 import juzu.plugin.ajax.Ajax;
 
 import org.exoplatform.commons.utils.ListAccess;
@@ -54,11 +56,6 @@ public class Controller
    @Inject
    @Path("index.gtmpl")
    org.gatein.portal.people.templates.index indexTemplate;
-
-   /** . */
-   @Inject
-   @Path("users.gtmpl")
-   org.gatein.portal.people.templates.users usersTemplate;
 
    /** . */
    @Inject
@@ -109,7 +106,7 @@ public class Controller
    @Ajax
    @Resource
    @Route("/users")
-   public void findUsers(String userName, String offset, String limit) throws Exception
+   public JSON findUsers(String userName, String offset, String limit) throws Exception
    {
       if (userName != null)
       {
@@ -137,7 +134,13 @@ public class Controller
       from = Math.min(from, len);
       size = Math.min(len - from, size);
       User[] users = list.load(from, size);
-      usersTemplate.with().users(users).render(); 
+      Map<String, Object> map = new LinkedHashMap<String, Object>();
+      for(User user : users)
+      {
+      	map.put(user.getUserName(), Builder.map("firstName", user.getFirstName()).map("lastName", user.getLastName()).build());
+      }
+     
+      return JSONUtil.createJSON(new StringBuilder(), map);
    }
 
    @Ajax

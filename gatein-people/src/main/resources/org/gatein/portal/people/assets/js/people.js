@@ -48,29 +48,44 @@ $(function () {
 
   //
   var searchUsers = function (append) {
-	append == append || false;
+  	append == append || false;
     var args = $("#users-search").serialize();
     if (append) {
       var offset = $(".user").size();
       args = args + "&offset=" + offset;
     }
+    
     log("doing request " + args)
-    $("<div></div>").load($(".jz").jzURL("Controller.findUsers"), args, function () {
-      if (!append) {
-        $("#users .checkable:not(.checked)").parents(".user").remove();
-      }
-      $(this).find(".user").filter(function() {
-        var id = this.id;
-        return document.getElementById(id) == null;
-      }).appendTo("#users");
-
-      //
-      if (!scrolling) {
-        scrolling = true;
-        scroller();
-      }
-    })
+    $('.jz').jzAjax("Controller.findUsers()", {
+    	data: args,
+    	type: "get",
+    	async: false,
+    	dataType: "json",
+    	success: function(resp) {
+    		if (!append) {
+          $("#users .checkable:not(.checked)").parents(".user").remove();
+        }
+    		$.each(resp, function(item) {
+    			if(document.getElementById(item) == null) {
+    				var html =
+          		"<li id=" + item +" class='user'>" +
+              "<a class='editable' href='#'><i class='icon-search icon-user'></i></a>" +
+              "<a class='checkable' href='#'><i class='icon-search icon-empty'></i><i class='icon-search icon-plane'></i><i class='icon-search icon-magnet'></i></a>" +
+              "<div class='display-name'>" + resp[item]["firstName"] + " " + resp[item]["lastName"] + "</div>";
+              "</li>";
+          		$(html).appendTo("#users");
+    			}
+    		});
+    		
+    		//
+        if (!scrolling) {
+          scrolling = true;
+          scroller();
+        }
+    	}
+    });
   };
+  
   var searchGroups = function (name, userName) {
 	var args = $("#groups-search").serialize();
     $('#groups').load($(".jz").jzURL("Controller.findGroups"), args, function () {
