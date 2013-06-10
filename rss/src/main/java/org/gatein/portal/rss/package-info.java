@@ -1,4 +1,5 @@
 @Assets(
+        location = AssetLocation.SERVER,
         scripts = {
                 @Script(id = "jquery", src = "js/jquery-1.7.1.min.js"),
                 @Script(id = "jquery-utils", src = "js/jquery-juzu-utils-0.1.0.js", depends = "jquery")
@@ -12,6 +13,7 @@
 @Portlet package org.gatein.portal.rss;
 
 import juzu.Application;
+import juzu.asset.AssetLocation;
 import juzu.plugin.asset.Assets;
 import juzu.plugin.asset.Script;
 import juzu.plugin.asset.Stylesheet;

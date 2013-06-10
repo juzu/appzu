@@ -12,8 +12,8 @@
 
   <groupId>org.juzu</groupId>
   <artifactId>juzu-appzu-rss-parent</artifactId>
-  <version>0.6.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <version>0.6.0</version>
+  <packaging>war</packaging>
 
   <name>RSS Application</name>
   <description>RSS app using Portlet filters</description>
@@ -21,6 +21,7 @@
   <properties>
     <maven.compiler.target>1.5</maven.compiler.target>
     <maven.compiler.source>1.5</maven.compiler.source>
+    <juzu.version>0.6.0</juzu.version>
   </properties>
 
   <dependencies>
@@ -28,13 +29,14 @@
     <!-- Application dependencies-->
     <dependency>
       <groupId>org.juzu</groupId>
-      <artifactId>juzu-builder</artifactId>
-      <version>${org.juzu.parent.version}</version>
+      <artifactId>juzu-bom-core</artifactId>
+      <version>${juzu.version}</version>
     </dependency>
     <dependency>
       <groupId>org.juzu</groupId>
       <artifactId>juzu-plugins-portlet</artifactId>
-      <version>${org.juzu.parent.version}</version>
+      <scope>provided</scope>
+      <version>${juzu.version}</version>
     </dependency>
 
     <dependency>
@@ -51,22 +53,22 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
-      <version>2.5</version>
+      <version>3.0.1</version>
     </dependency>
 
     <dependency>
         <groupId>org.exoplatform.portal</groupId>
         <artifactId>exo.portal.component.portal</artifactId>
-        <version>3.2.3-PLF</version>
         <scope>provided</scope>
+        <version>3.2.5-PLF</version>
     </dependency>
     <dependency>
         <groupId>org.exoplatform.portal</groupId>
         <artifactId>exo.portal.webui.portal</artifactId>
-        <version>3.2.3-PLF</version>
         <scope>provided</scope>
+        <version>3.2.5-PLF</version>
     </dependency>
 
   </dependencies>
@@ -75,72 +77,13 @@
     <finalName>rss</finalName>
     <plugins>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.3</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.juzu</groupId>
-            <artifactId>juzu-builder</artifactId>
-            <version>${org.juzu.parent.version}</version>
-          </dependency>
-        </dependencies>
+        <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <appendAssemblyId>false</appendAssemblyId>
-          <attach>true</attach>
+          <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
         </configuration>
-        <executions>
-          <execution>
-            <id>gatein</id>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <descriptorRefs>
-                <descriptorRef>gatein</descriptorRef>
-              </descriptorRefs>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>deploy</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.4</version>
-            <executions>
-              <execution>
-                <id>copy</id>
-                <phase>install</phase>
-                <goals>
-                  <goal>copy</goal>
-                </goals>
-                <configuration>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>org.juzu</groupId>
-                      <artifactId>juzu-appzu-rss-parent</artifactId>
-                      <version>1.0-SNAPSHOT</version>
-                      <type>war</type>
-                      <overWrite>false</overWrite>
-                      <outputDirectory>${project.output.directory}</outputDirectory>
-                      <destFileName>rss.war</destFileName>
-                    </artifactItem>
-                  </artifactItems>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 </project>

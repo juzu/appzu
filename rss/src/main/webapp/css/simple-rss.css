@@ -1,5 +1,5 @@
 .simpleRssPortlet {
-  padding: 2px;
+  padding: 20px;
 }
 
 .simpleRssPortlet .more {
@@ -13,31 +13,40 @@
 
 .simpleRssPortlet .titleRss {
   line-height: 25px;
-  padding: 0 5px 0 8px;
-  background: #F8F8F8;
+  padding: 10px 20px;
+  /*
+  background: #f0f0f0;
   border: 1px solid #E1E1E1;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   color: #2F3334;
-  font-size: 14px;
+  */
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.simpleRssPortlet .itemsRss .uiBox {
+  margin-top: 20px;
+  padding: 6px;
 }
 
 .simpleRssPortlet .item {
   padding: 10px;
 }
 
-.simpleRssPortlet .item .title {
-  font-size: 100%;
-  color: #434343;
+.simpleRssPortlet .item .titleItem {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .simpleRssPortlet .item .pubDate {
-  font-size: 80%;
+  font-size: 13px;
   color: #999;
 }
 
 .simpleRssPortlet .item .description {
-  font-size: 80%;
+  font-size: 13px;
   color: #434343;
 }
